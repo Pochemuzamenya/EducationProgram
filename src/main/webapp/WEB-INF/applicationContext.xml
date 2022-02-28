@@ -40,7 +40,7 @@
         <property name="driverClassName" value="org.postgresql.Driver" />
         <!--Connection URL-->
         <!--<property name="url" value="jdbc:postgresql://localhost:5432/education_program" />-->
-        <property name="url" value="postgres://uxdyqpuvketwfa:bb5c701489554bcccc823354c6d8379a0313423f7a5f6a3be8f0ca0e6ffbaf57@ec2-54-195-76-73.eu-west-1.compute.amazonaws.com:5432/dcov80eost9te3" />
+        <property name="url" value="postgres://uxdyqpuvketwfa:bb5c701489554bcccc823354c6d8379a0313423f7a5f6a3be8f0ca0e6ffbaf57@ec2-54-195-76-73.eu-west-1.compute.amazonaws.com:5432/dcov80eost9te3?sslmode=require" />
         <!--<property name="username" value="postgres" />-->
         <property name="username" value="uxdyqpuvketwfa" />
         <!--<property name="password" value="admin" />-->
