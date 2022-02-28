@@ -11,6 +11,7 @@ import java.util.List;
 public class SubjectService {
     @Autowired
     SubjectRepository repository;
+
     public List<Subject> findAll() {
         return repository.findAll();
     }
@@ -21,4 +22,9 @@ public class SubjectService {
         repository.saveAndFlush(subject);
     }
 
+    public void update(Integer id, Subject updatedSubject) {
+        Subject subjectToBeUpdated = findById(id);
+        System.out.println(updatedSubject.getName());
+        //repository.updateSubject(id,updatedSubject.getName());
+    }
 }

@@ -43,4 +43,15 @@ public class SubjectController {
         service.save(subject);
         return "redirect:/subjects";
     }
+    @GetMapping("/{id}/edit")
+    public String edit(Model model, @PathVariable("id") int id) {
+        model.addAttribute("subject", service.findById(id));
+        return "subjects/edit";
+    }
+
+    @PatchMapping("/{id}")
+    public String update(@ModelAttribute("subject") Subject subject, @PathVariable("id") int id) {
+        service.update(id, subject);
+        return "redirect:/subjects";
+    }
 }

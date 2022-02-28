@@ -41,6 +41,8 @@
             </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
+    <context:component-scan base-package="controllers"/>
+    <context:component-scan base-package="services"/>
     <!--Paging and Sorting-->
     <!--<mvc:annotation-driven conversion-service="conversionService">
         <mvc:argument-resolvers>
@@ -53,10 +55,8 @@
 
     <bean class="org.springframework.data.repository.support.DomainClassConverter">
         <constructor-arg name="conversionService" ref="conversionService"/>
-    </bean>-->
-
-    <context:component-scan base-package="controllers"/>
-    <context:component-scan base-package="services"/>
+    </bean>
+-->
     <bean id="templateResolver"
           class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
         <property name="prefix" value="/WEB-INF/views/" />
