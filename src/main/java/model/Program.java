@@ -23,15 +23,10 @@ public class Program {
     @JsonIgnore
     private Integer id;
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "learning_profile_id")
-    private LearningProfile learning_profile;
+    private Set set;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "subject_id")
     private Subject subject;
-    @Column
-    private String study_form;
-    @Column
-    private Integer year;
     @Column
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
     private Timestamp creation_date;
@@ -40,9 +35,8 @@ public class Program {
     private Timestamp last_edit;
     @Column
     private String status;
-    @Column
-    @JsonIgnore
-    private String degree;
+    @OneToOne
+    private Chair chair;
 
     public Program() {
     }
@@ -51,14 +45,14 @@ public class Program {
     public String toString() {
         return "Program{" +
                 "id=" + id +
-                ", learning_profile=" + learning_profile +
+                ", learning_profile=" + set.getLearning_profile().getName() +
                 ", subject=" + subject.getName() +
-                ", study_form='" + study_form + '\'' +
-                ", year=" + year +
+                ", study_form='" + set.getStudy_form() + '\'' +
+                ", year=" + set.getYear() +
                 ", creation_date=" + creation_date +
                 ", last_edit=" + last_edit +
                 ", status='" + status + '\'' +
-                ", degree='" + degree + '\'' +
+                ", degree='" + set.getDegree() + '\'' +
                 '}';
     }
     /**/
@@ -66,11 +60,11 @@ public class Program {
     @JsonRawValue
     public String toJson(){
         return "\n{\n\"subject\": \"" + subject.getName() + "\",\n" +
-                "\"specialty_code\": \"" + learning_profile.getSpecialty().getCode() + "\",\n" +
-                "\"specialty\": \"" + learning_profile.getSpecialty().getName() + "\",\n" +
-                "\"learning_profile\": \"" + learning_profile.getName() + "\",\n" +
-                "\"study_form\": \"" + study_form + "\",\n" +
-                "\"year\": \"" + year + "\",\n" +
+                "\"specialty_code\": \"" + set.getLearning_profile().getSpecialty().getCode() + "\",\n" +
+                "\"specialty\": \"" + set.getLearning_profile().getSpecialty().getName() + "\",\n" +
+                "\"learning_profile\": \"" + set.getLearning_profile().getName() + "\",\n" +
+                "\"study_form\": \"" + set.getStudy_form() + "\",\n" +
+                "\"year\": \"" + set.getYear() + "\",\n" +
                 "\"last_edit\": \"" + last_edit + "\",\n" +
                 "\"creation_date\": \"" + creation_date + "\",\n" +
                 "\"status\": \"" + status + "\"\n" +

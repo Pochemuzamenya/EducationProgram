@@ -11,7 +11,6 @@ import java.util.List;
 public class LearningProfile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIgnore
     private Integer id;
     @Column
     private String name;
