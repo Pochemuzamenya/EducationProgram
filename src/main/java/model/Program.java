@@ -16,6 +16,7 @@ import org.hibernate.annotations.TypeDefs;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Entity
@@ -54,6 +55,19 @@ public class Program {
     public Program() {
     }
 
+    @Override
+    public String toString() {
+        return "\n{\n\"subject\": \"" + subject.getName() + "\",\n" +
+                "\"specialty_code\": \"" + set.getLearning_profile().getSpecialty().getCode() + "\",\n" +
+                "\"specialty\": \"" + set.getLearning_profile().getSpecialty().getName() + "\",\n" +
+                "\"learning_profile\": \"" + set.getLearning_profile().getName() + "\",\n" +
+                "\"study_form\": \"" + set.getStudy_form() + "\",\n" +
+                "\"year\": \"" + set.getYear() + "\",\n" +
+                "\"last_edit\": \"" + version.getLast_edit() + "\",\n" +
+                "\"creation_date\": \"" + version.getCreation_date() + "\",\n" +
+                "\"status\": \"" + status + "\"\n" +
+                "}";
+    }
 
     @JsonValue
     @JsonRawValue

@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
+@Table(name = "versions")
 public class Version {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
