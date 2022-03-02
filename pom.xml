@@ -112,6 +112,12 @@
       <version>1.18.12</version>
       <scope>provided</scope>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/com.vladmihalcea/hibernate-types-52 -->
+    <dependency>
+      <groupId>com.vladmihalcea</groupId>
+      <artifactId>hibernate-types-52</artifactId>
+      <version>2.14.0</version>
+    </dependency>
 
   </dependencies>
 

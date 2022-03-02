@@ -4,19 +4,31 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonRawValue;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.vladmihalcea.hibernate.type.array.IntArrayType;
 import jdk.nashorn.internal.objects.annotations.Constructor;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.TypeDefs;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Table(name = "programs")
 @Getter
 @Setter
+@ToString
+@TypeDefs({
+        @TypeDef(
+                name = "int-array",
+                typeClass = IntArrayType.class
+        )
+})
 public class Program {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,34 +40,21 @@ public class Program {
     @JoinColumn(name = "subject_id")
     private Subject subject;
     @Column
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
-    private Timestamp creation_date;
-    @Column
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
-    private Timestamp last_edit;
+    private String subject_index;
     @Column
     private String status;
     @OneToOne
     private Chair chair;
+    @OneToOne
+    private Version version;
+    @Type( type = "int-array" )
+    @Column(columnDefinition = "integer[]")
+    private Integer[] semestrs;
 
     public Program() {
     }
 
-    @Override
-    public String toString() {
-        return "Program{" +
-                "id=" + id +
-                ", learning_profile=" + set.getLearning_profile().getName() +
-                ", subject=" + subject.getName() +
-                ", study_form='" + set.getStudy_form() + '\'' +
-                ", year=" + set.getYear() +
-                ", creation_date=" + creation_date +
-                ", last_edit=" + last_edit +
-                ", status='" + status + '\'' +
-                ", degree='" + set.getDegree() + '\'' +
-                '}';
-    }
-    /**/
+
     @JsonValue
     @JsonRawValue
     public String toJson(){
@@ -65,8 +64,8 @@ public class Program {
                 "\"learning_profile\": \"" + set.getLearning_profile().getName() + "\",\n" +
                 "\"study_form\": \"" + set.getStudy_form() + "\",\n" +
                 "\"year\": \"" + set.getYear() + "\",\n" +
-                "\"last_edit\": \"" + last_edit + "\",\n" +
-                "\"creation_date\": \"" + creation_date + "\",\n" +
+                "\"last_edit\": \"" + version.getLast_edit() + "\",\n" +
+                "\"creation_date\": \"" + version.getCreation_date() + "\",\n" +
                 "\"status\": \"" + status + "\"\n" +
                 "}";
     }

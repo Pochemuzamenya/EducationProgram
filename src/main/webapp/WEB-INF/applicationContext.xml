@@ -39,12 +39,12 @@
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="org.postgresql.Driver" />
         <!--Connection URL-->
-        <!--<property name="url" value="jdbc:postgresql://localhost:5432/education_program" />-->
-        <property name="url" value="jdbc:postgresql://ec2-52-30-133-191.eu-west-1.compute.amazonaws.com/dd5vfn7g425bd3?sslmode=require" />
-        <!--<property name="username" value="postgres" />-->
-        <property name="username" value="etdytxyeucjgbd" />
-        <!--<property name="password" value="admin" />-->
-    <property name="password" value="8d014e3e33408207bd347f70579964fe8d76a47ec98bd5a26e4da0d9ffbf29a7" />
+        <property name="url" value="jdbc:postgresql://localhost:5432/education_program" />
+        <!--<property name="url" value="jdbc:postgresql://ec2-52-30-133-191.eu-west-1.compute.amazonaws.com/dd5vfn7g425bd3?sslmode=require" />-->
+        <property name="username" value="postgres" />
+        <!--<property name="username" value="etdytxyeucjgbd" />-->
+        <property name="password" value="admin" />
+    <!--<property name="password" value="8d014e3e33408207bd347f70579964fe8d76a47ec98bd5a26e4da0d9ffbf29a7" />-->
 </bean >
 
 <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">

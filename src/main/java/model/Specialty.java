@@ -15,6 +15,8 @@ public class Specialty {
     private String name;
     @Column
     private String code;
+    @Column
+    private String degree;
 
     @Override
     public String toString() {
@@ -47,6 +49,14 @@ public class Specialty {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDegree() {
+        return degree;
+    }
+
+    public void setDegree(String degree) {
+        this.degree = degree;
     }
 
     public Specialty() {

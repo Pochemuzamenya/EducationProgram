@@ -38,6 +38,9 @@ public class ProgramController {
         filters.setYear(years);
         filters.setSubject(subjects);
         List<Program> programs = service.findAll();
+        for(Program p: programs){
+            System.out.println(p);
+        }
         ResponseJSON response = new ResponseJSON(programs, filters);
         return response;
     }

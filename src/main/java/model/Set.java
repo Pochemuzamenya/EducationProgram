@@ -17,8 +17,6 @@ public class Set {
     @OneToOne
     private Chair chair;
     @Column
-    private String degree;
-    @Column
     private String study_form;
     @Column
     private Integer year;
@@ -45,14 +43,6 @@ public class Set {
 
     public void setChair(Chair chair) {
         this.chair = chair;
-    }
-
-    public String getDegree() {
-        return degree;
-    }
-
-    public void setDegree(String degree) {
-        this.degree = degree;
     }
 
     public String getStudy_form() {

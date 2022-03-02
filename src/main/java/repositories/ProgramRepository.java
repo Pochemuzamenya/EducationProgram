@@ -20,7 +20,7 @@ public interface ProgramRepository extends JpaRepository<Program, Integer> {
     List<String> findSubjectNames();
     @Query("SELECT DISTINCT s.name FROM Specialty as s")
     List<String> findSpecialtyNames();
-    @Query("SELECT DISTINCT p.set.degree FROM Program as p")
+    @Query("SELECT DISTINCT p.set.learning_profile.specialty.degree FROM Program as p")
     List<String> findDegrees();
 
 }
