@@ -41,10 +41,6 @@ public class Subject {
     public String toString() {
         return "Subject:"  + name + '\'';
     }
-    @JsonValue
-    public String toJson(){
-        return this.name;
-    }
 }
 
 

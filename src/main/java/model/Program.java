@@ -12,6 +12,7 @@ import lombok.ToString;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
+import org.json.JSONObject;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -40,17 +41,17 @@ public class Program {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "subject_id")
     private Subject subject;
-    @Column
-    private String subject_index;
+    /*@Column
+    private String subject_index;*/
     @Column
     private String status;
     @OneToOne
     private Chair chair;
     @OneToOne
     private Version version;
-    @Type( type = "int-array" )
+    /*@Type( type = "int-array" )
     @Column(columnDefinition = "integer[]")
-    private Integer[] semestrs;
+    private Integer[] semestrs;*/
 
     public Program() {
     }
@@ -69,10 +70,85 @@ public class Program {
                 "}";
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Set getSet() {
+        return set;
+    }
+
+    public void setSet(Set set) {
+        this.set = set;
+    }
+
+    public Subject getSubject() {
+        return subject;
+    }
+
+    public void setSubject(Subject subject) {
+        this.subject = subject;
+    }
+
+    /*public String getSubject_index() {
+        return subject_index;
+    }
+
+    public void setSubject_index(String subject_index) {
+        this.subject_index = subject_index;
+    }*/
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Chair getChair() {
+        return chair;
+    }
+
+    public void setChair(Chair chair) {
+        this.chair = chair;
+    }
+
+    public Version getVersion() {
+        return version;
+    }
+
+    public void setVersion(Version version) {
+        this.version = version;
+    }
+
+    /*public Integer[] getSemestrs() {
+        return semestrs;
+    }
+
+    public void setSemestrs(Integer[] semestrs) {
+        this.semestrs = semestrs;
+    }*/
+
     @JsonValue
     @JsonRawValue
-    public String toJson(){
-        return "\n{\n\"subject\": \"" + subject.getName() + "\",\n" +
+    public JSONObject toJson(){
+        JSONObject json = new JSONObject();
+        json.put("subject", subject.getName());
+        json.put("specialty_code",set.getLearning_profile().getSpecialty().getCode());
+        json.put("specialty",set.getLearning_profile().getSpecialty().getName());
+        json.put("learning_profile",set.getLearning_profile().getName());
+        json.put("study_form",set.getStudy_form());
+        json.put("year",set.getYear());
+        json.put("last_edit",version.getLast_edit());
+        json.put("creation_date",version.getCreation_date());
+        json.put("status",status);
+        return json;
+        /*return "\n{\n\"subject\": \"" + subject.getName() + "\",\n" +
                 "\"specialty_code\": \"" + set.getLearning_profile().getSpecialty().getCode() + "\",\n" +
                 "\"specialty\": \"" + set.getLearning_profile().getSpecialty().getName() + "\",\n" +
                 "\"learning_profile\": \"" + set.getLearning_profile().getName() + "\",\n" +
@@ -81,7 +157,7 @@ public class Program {
                 "\"last_edit\": \"" + version.getLast_edit() + "\",\n" +
                 "\"creation_date\": \"" + version.getCreation_date() + "\",\n" +
                 "\"status\": \"" + status + "\"\n" +
-                "}";
+                "}";*/
     }
 
 }

@@ -16,8 +16,6 @@ public class LearningProfile {
     private String name;
     @OneToOne
     private Specialty specialty;
-    @OneToOne
-    private Chair chair;
 
     public LearningProfile() {
     }
@@ -46,21 +44,12 @@ public class LearningProfile {
         this.specialty = specialty;
     }
 
-    public Chair getChair() {
-        return chair;
-    }
-
-    public void setChair(Chair chair) {
-        this.chair = chair;
-    }
-
     @Override
     public String toString() {
         return "LearningProfile{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", specialty=" + specialty +
-                ", chair=" + chair +
                 '}';
     }
 }
