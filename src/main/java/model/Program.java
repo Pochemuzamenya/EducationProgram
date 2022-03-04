@@ -138,6 +138,7 @@ public class Program {
     @JsonRawValue
     public JSONObject toJson(){
         JSONObject json = new JSONObject();
+        json.put("id", id);
         json.put("subject", subject.getName());
         json.put("specialty_code",set.getLearning_profile().getSpecialty().getCode());
         json.put("specialty",set.getLearning_profile().getSpecialty().getName());
