@@ -12,6 +12,7 @@ import org.hibernate.annotations.TypeDefs;
 import org.json.JSONObject;
 
 import javax.persistence.*;
+import java.util.HashSet;
 
 @Entity
 @Table(name = "programs")
@@ -44,6 +45,16 @@ public class CoverSheet {
     public CoverSheet() {
     }
 
+    /*public Integer[] getCourses(Integer[] semestrs){
+        semestrs.length
+    }*/
+    private static java.util.Set<Integer> getCourses(Integer[] semestrs) {
+        java.util.Set set = new HashSet();
+        for (Integer i:semestrs){
+            set.add((i+1)/2);
+        }
+        return set;
+    }
     @JsonValue
     @JsonRawValue
     public JSONObject toJson(){
@@ -57,6 +68,7 @@ public class CoverSheet {
         json.put("study_form",set.getStudy_form());
         json.put("chair", set.getChair().getName());
         json.put("semestrs", semestrs);
+        json.put("courses",getCourses(semestrs));
         json.put("year",set.getYear());
         return json;
     }
