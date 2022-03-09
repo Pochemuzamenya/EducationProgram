@@ -1,6 +1,5 @@
 package services;
 
-import model.CoverSheet;
 import model.Program;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,8 +31,5 @@ public class ProgramService {
     }
     public List<String> findDegrees(){
         return repository.findDegrees();
-    }
-    public CoverSheet findCoverSheet(int id){
-        return repository.findCoverSheet(id);
     }
 }

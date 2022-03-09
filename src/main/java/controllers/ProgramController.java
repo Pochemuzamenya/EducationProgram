@@ -49,10 +49,5 @@ public class ProgramController {
         Program program = service.findById(id);
         return program;
     }
-    @GetMapping(value = "/{id}/cover-sheet", produces = "application/json")
-    public @ResponseBody
-    CoverSheet findCoverSheet(@PathVariable("id") int id){
-        CoverSheet coverSheet = service.findCoverSheet(id);
-        return coverSheet;
-    }
+
 }

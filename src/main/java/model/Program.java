@@ -18,6 +18,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 @Entity
@@ -49,6 +50,11 @@ public class Program {
     private Chair chair;
     @OneToOne
     private Version version;
+    @Column
+    private String subject_index;
+    @Type( type = "int-array" )
+    @Column(columnDefinition = "integer[]")
+    private Integer[] semestrs;
     /*@Type( type = "int-array" )
     @Column(columnDefinition = "integer[]")
     private Integer[] semestrs;*/
@@ -134,6 +140,29 @@ public class Program {
         this.semestrs = semestrs;
     }*/
 
+    public String getSubject_index() {
+        return subject_index;
+    }
+
+    public void setSubject_index(String subject_index) {
+        this.subject_index = subject_index;
+    }
+
+    public Integer[] getSemestrs() {
+        return semestrs;
+    }
+
+    public void setSemestrs(Integer[] semestrs) {
+        this.semestrs = semestrs;
+    }
+
+    private java.util.Set<Integer> getCourses(Integer[] semestrs) {
+        java.util.Set set = new HashSet();
+        for (Integer i:semestrs){
+            set.add((i+1)/2);
+        }
+        return set;
+    }
     @JsonValue
     @JsonRawValue
     public JSONObject toJson(){
@@ -148,6 +177,10 @@ public class Program {
         json.put("last_edit",version.getLast_edit());
         json.put("creation_date",version.getCreation_date());
         json.put("status",status);
+        json.put("index", subject_index);
+        json.put("semestrs", semestrs);
+        json.put("courses",getCourses(semestrs));
+        json.put("year",set.getYear());
         return json;
         /*return "\n{\n\"subject\": \"" + subject.getName() + "\",\n" +
                 "\"specialty_code\": \"" + set.getLearning_profile().getSpecialty().getCode() + "\",\n" +
