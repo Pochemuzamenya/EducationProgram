@@ -19,4 +19,8 @@ public class SpecialtyService {
     public Specialty findById(int id) {
         return repository.findById(id);
     }
+
+    public void save(Specialty specialty) {
+        repository.saveAndFlush(specialty);
+    }
 }

@@ -13,7 +13,5 @@ import java.util.List;
 public interface SubjectRepository extends JpaRepository<Subject, Integer> {
     List<Subject> findAll();
     Subject findById(@Param("id") int id);
-    /*@Modifying
-    @Query("update Subject s set s.name = :name where s.id = :id")
-    int updateSubject(@Param("id") Integer id, @Param("name") String name);*/
+    Subject findByName(String name);
 }

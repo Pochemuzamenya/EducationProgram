@@ -1,13 +1,11 @@
 package controllers;
 
 import model.LearningProfile;
+import model.Program;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import repositories.LearningProfileRepository;
 import services.LearningProfileService;
 
@@ -34,5 +32,10 @@ public class LearningProfileController {
         System.out.println(learningProfile);
         model.addAttribute("learning_profile", learningProfile);
         return learningProfile;
+    }
+    @PostMapping(produces = "application/json", consumes = "application/json")
+    public @ResponseBody LearningProfile create(@RequestBody LearningProfile learning_profile){
+        service.save(learning_profile);
+        return learning_profile;
     }
 }

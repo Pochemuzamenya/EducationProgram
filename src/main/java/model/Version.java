@@ -5,6 +5,7 @@ import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
 
 @Entity
 @Table(name = "versions")
@@ -24,6 +25,9 @@ public class Version {
     private Integer teacher_id;
     @Column
     private Boolean current;
+
+    public Version() {
+    }
 
     public Integer getId() {
         return id;
@@ -71,5 +75,17 @@ public class Version {
 
     public void setCurrent(Boolean current) {
         this.current = current;
+    }
+
+    @Override
+    public String toString() {
+        return "Version{" +
+                "id=" + id +
+                ", number=" + number +
+                ", creation_date=" + creation_date +
+                ", last_edit=" + last_edit +
+                ", teacher_id=" + teacher_id +
+                ", current=" + current +
+                '}';
     }
 }

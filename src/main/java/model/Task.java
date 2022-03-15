@@ -1,21 +1,22 @@
 package model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.annotation.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
-@Table(name = "learning_profiles")
-public class LearningProfile {
+@Table(name = "tasks")
+public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column
     private String name;
 
-    public LearningProfile() {
+    public Task() {
     }
 
     public Integer getId() {
@@ -26,6 +27,7 @@ public class LearningProfile {
         this.id = id;
     }
 
+    @JsonValue
     public String getName() {
         return name;
     }
@@ -34,11 +36,10 @@ public class LearningProfile {
         this.name = name;
     }
 
+
     @Override
     public String toString() {
-        return "LearningProfile{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+        return name;
     }
+
 }

@@ -27,4 +27,7 @@ public class SubjectService {
         System.out.println(updatedSubject.getName());
         //repository.updateSubject(id,updatedSubject.getName());
     }
+    public Subject findByName(String name){
+        return repository.findByName(name);
+    }
 }

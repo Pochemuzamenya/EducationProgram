@@ -2,6 +2,7 @@ package services;
 
 import model.Program;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import repositories.ProgramRepository;
 
@@ -13,6 +14,13 @@ public class ProgramService {
     ProgramRepository repository;
     public List<Program> findAll(){
         return repository.findAll();
+    }
+    public List<Program> findAll(String sort , String dir){
+        if (sort==null)
+            return repository.findAll();
+        if (dir.equals("ASC") || dir == null)
+            return repository.findAll(new Sort(Sort.Direction.ASC,sort));
+        return repository.findAll(new Sort(Sort.Direction.DESC,sort));
     }
     public Program findById(int id){
         return repository.findById(id);
@@ -31,5 +39,8 @@ public class ProgramService {
     }
     public List<String> findDegrees(){
         return repository.findDegrees();
+    }
+    public void save(Program program){
+        repository.saveAndFlush(program);
     }
 }

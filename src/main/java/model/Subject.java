@@ -39,32 +39,10 @@ public class Subject {
 
     @Override
     public String toString() {
-        return "Subject:"  + name + '\'';
+        return "Subject{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }
 
-
-
-/*@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
-private Integer id;
-    @Column
-    private String subject;
-    @Column
-    private String specialty_code;
-    @Column
-    private String specialty;
-    @Column
-    private String learning_profile;
-    @Column
-    private String study_form;
-    @Column
-    private Integer year;
-    @Column
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
-    private Timestamp creation_date;
-    @Column
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
-    private Timestamp last_edit;
-    @Column
-    private String status;*/

@@ -9,14 +9,11 @@ import javax.persistence.*;
 public class Specialty {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIgnore
     private Integer id;
     @Column
     private String name;
     @Column
     private String code;
-    @Column
-    private String degree;
 
     @Override
     public String toString() {
@@ -49,14 +46,6 @@ public class Specialty {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getDegree() {
-        return degree;
-    }
-
-    public void setDegree(String degree) {
-        this.degree = degree;
     }
 
     public Specialty() {

@@ -1,13 +1,11 @@
 package controllers;
 
+import model.Program;
 import model.Specialty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import repositories.SpecialtyRepository;
 import services.SpecialtyService;
 
@@ -33,6 +31,11 @@ public class SpecialtyController {
         Specialty specialty = service.findById(id);
         System.out.println(specialty);
         model.addAttribute("subject", specialty);
+        return specialty;
+    }
+    @PostMapping(produces = "application/json", consumes = "application/json")
+    public @ResponseBody Specialty create(@RequestBody Specialty specialty){
+        service.save(specialty);
         return specialty;
     }
 }
