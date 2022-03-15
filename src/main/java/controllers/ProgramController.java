@@ -29,6 +29,10 @@ public class ProgramController {
     SubjectService subjectService;
     @Autowired
     VersionService versionService;
+    @Autowired
+    DegreeService degreeService;
+    @Autowired
+    StudyFormService studyFormService;
 
     @GetMapping(produces = "application/json")
     public @ResponseBody
@@ -63,6 +67,8 @@ public class ProgramController {
         json.setSpecialties(specialtyService.findAll());
         json.setLearning_profiles(learningProfileService.findAll());
         json.setChairs(chairService.findAll());
+        json.setDegrees(degreeService.findAll());
+        json.setStudyForms(studyFormService.findAll());
         return json;
     }
 

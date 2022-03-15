@@ -12,6 +12,8 @@ public class NewProgramJSON {
     private List<Specialty> specialties;
     private List<LearningProfile> learning_profiles;
     private List<Chair> chairs;
+    private List<Degree> degrees;
+    private List<StudyForm> studyForms;
 
     public NewProgramJSON() {
     }
@@ -46,5 +48,21 @@ public class NewProgramJSON {
 
     public void setSubjects(List<Subject> subjects) {
         this.subjects = subjects;
+    }
+
+    public List<Degree> getDegrees() {
+        return degrees;
+    }
+
+    public void setDegrees(List<Degree> degrees) {
+        this.degrees = degrees;
+    }
+
+    public List<StudyForm> getStudyForms() {
+        return studyForms;
+    }
+
+    public void setStudyForms(List<StudyForm> studyForms) {
+        this.studyForms = studyForms;
     }
 }
