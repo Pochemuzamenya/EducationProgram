@@ -43,4 +43,7 @@ public class ProgramService {
     public void save(Program program){
         repository.saveAndFlush(program);
     }
+    public void delete(Program program){
+        repository.delete(program);
+    }
 }

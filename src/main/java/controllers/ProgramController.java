@@ -96,5 +96,10 @@ public class ProgramController {
         programService.save(programToUpdate);
         return programToUpdate;
     }
+    @DeleteMapping(value = "/{id}",produces = "application/json", consumes = "application/json")
+    public @ResponseBody void delete(@PathVariable("id") int id){
+        Program program = programService.findById(id);
+        programService.delete(program);
+    }
 
 }
