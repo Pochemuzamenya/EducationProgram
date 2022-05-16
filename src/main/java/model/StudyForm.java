@@ -1,7 +1,13 @@
 package model;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import javax.persistence.*;
 
+@Getter
+@Setter
+@ToString
 @Entity
 @Table(name = "study_forms")
 public class StudyForm {
@@ -12,29 +18,5 @@ public class StudyForm {
     private String name;
 
     public StudyForm() {
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return "StudyForm{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
     }
 }

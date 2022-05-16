@@ -1,18 +1,14 @@
 package controllers;
 
 import model.*;
-import org.json.JSONObject;
-import org.json.JSONPropertyIgnore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import services.*;
-
-import javax.validation.Valid;
 import java.sql.Timestamp;
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping(value = "/programs")
 public class ProgramController {
 
@@ -35,7 +31,7 @@ public class ProgramController {
     StudyFormService studyFormService;
 
     @GetMapping(produces = "application/json")
-    public @ResponseBody
+    public
     ResponseJSON findAll(){
         Filter filters = new Filter();
         List<String> subjects = programService.findSubjectNames();
@@ -54,14 +50,14 @@ public class ProgramController {
     }
 
     @GetMapping(value = "/{id}", produces = "application/json")
-    public @ResponseBody
+    public
     Program findById(@PathVariable("id") int id){
         Program program = programService.findById(id);
         return program;
     }
 
     @GetMapping(value = "/new", produces = "application/json")
-    public @ResponseBody NewProgramJSON addProgram(){
+    public NewProgramJSON addProgram(){
         NewProgramJSON json = new NewProgramJSON();
         json.setSubjects(subjectService.findAll());
         json.setSpecialties(specialtyService.findAll());
@@ -73,31 +69,36 @@ public class ProgramController {
     }
 
     @PostMapping(produces = "application/json", consumes = "application/json")
-    public @ResponseBody Program create(@RequestBody Program program){
+    public Program create(@RequestBody Program program){
+        System.out.println(program);
         Version version = new Version();
         version.setCreation_date(new Timestamp(System.currentTimeMillis()));
         version.setLast_edit(new Timestamp(System.currentTimeMillis()));
-        /*if(program.getSubject().getId()==null){
-            Subject subject = new Subject();
-            subject.setName(program.getSubject().getName());
-            subjectService.save(subject);
-            program.setSubject(subject);
-        }*/
         versionService.save(version);
         program.setVersion(version);
         programService.save(program);
         return program;
     }
     @PutMapping(value = "/{id}",produces = "application/json", consumes = "application/json")
-    public @ResponseBody Program update(@PathVariable("id") int id, @RequestBody Program program){
+    public Program update(@PathVariable("id") int id, @RequestBody Program program){
         Program programToUpdate = programService.findById(id);
+/*        System.out.println("Anything");
+        System.out.println(program);
+        Timestamp creationDate = programToUpdate.getVersion().getCreation_date();
+
+        programToUpdate= new Program(program);
+        programToUpdate.setId(id);
+        programToUpdate.getVersion.setCreation_date(creationDate);
+        programToUpdate.getVersion.setLast_edit(new Timestamp(System.currentTimeMillis()));
+        */
         programToUpdate.copyParameters(program);
         versionService.save(programToUpdate.getVersion());
         programService.save(programToUpdate);
+        //return null;
         return programToUpdate;
     }
     @DeleteMapping(value = "/{id}",produces = "application/json", consumes = "application/json")
-    public @ResponseBody void delete(@PathVariable("id") int id){
+    public void delete(@PathVariable("id") int id){
         Program program = programService.findById(id);
         programService.delete(program);
     }
