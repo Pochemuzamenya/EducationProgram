@@ -47,6 +47,7 @@ public class Subsection {
             joinColumns = {@JoinColumn(name = "subsection_id")},
             inverseJoinColumns = {@JoinColumn(name = "issue_id")})
     private List<Issue> issues;
+
     public Subsection() {
     }
 }

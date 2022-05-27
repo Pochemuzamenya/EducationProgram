@@ -3,8 +3,11 @@ package model;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -23,6 +26,7 @@ public class LessonForm {
     private Theme theme;
     @Column
     private Integer hours;
+    
 
     public LessonForm() {
     }

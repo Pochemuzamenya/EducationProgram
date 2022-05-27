@@ -1,28 +1,27 @@
 package model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+
+@Entity
 @Getter
 @Setter
 @ToString
-@Entity
-@Table(name = "specialties")
-public class Specialty {
+@Table(name = "results")
+public class Result {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column
-    private String name;
+    private String knowledges;
     @Column
-    private String code;
-    @ManyToOne
-    private Chair chair;
+    private String skills;
+    @Column
+    private String masterings;
 
-    public Specialty() {
+    public Result() {
     }
-
 }

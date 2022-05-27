@@ -1,5 +1,6 @@
 package model;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.vladmihalcea.hibernate.type.array.IntArrayType;
 import com.vladmihalcea.hibernate.type.array.StringArrayType;
 import lombok.Getter;
@@ -47,7 +48,7 @@ public class Program {
     private String degree;
     @ManyToOne
     private Chair chair;
-    @ManyToOne
+    @OneToOne
     private Version version;
     @Column(name = "index")
     private String subject_index;
@@ -102,6 +103,8 @@ public class Program {
     @Column
     private String guidance;
     @Column
+    private Boolean has_coursework;
+    @Column
     private String coursework_theme;
     @Type(type = "string-array")
     @Column
@@ -124,6 +127,8 @@ public class Program {
     @Type(type = "string-array")
     @Column
     private String[] technical_means;
+    @Column
+    private String educational_technologies;
     @ManyToMany
     @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(name = "programs_lesson_forms",
