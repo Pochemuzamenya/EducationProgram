@@ -1,0 +1,72 @@
+{
+  "lesson_plan" : {
+    "id" : 1,
+    "learningProfile" : {
+      "id" : 1,
+      "name" : "Информатика и компьютерные науки",
+      "specialty" : {
+        "id" : 1,
+        "name" : "Фундаментальная информатика",
+        "code" : "02.03.02",
+        "chair" : {
+          "id" : 1,
+          "name" : "Алгебраических и информационных систем",
+          "number" : null,
+          "faculty" : {
+            "id" : 1,
+            "name" : "Институт математики и информационных технологий"
+          }
+        }
+      }
+    },
+    "degree" : "Бакалавр",
+    "study_form" : "Очная",
+    "year" : 2022,
+    "competences" : [ {
+      "id" : 8,
+      "code" : "ОПК-1",
+      "description" : null,
+      "indicators" : [ {
+        "id" : 4,
+        "code" : "Идк2",
+        "description" : "Формулировка компетенции Идк2",
+        "know" : null,
+        "can" : null,
+        "own" : null
+      } ]
+    } ]
+  },
+  "chair" : {
+    "id" : 1,
+    "name" : "Алгебраических и информационных систем",
+    "number" : null,
+    "faculty" : {
+      "id" : 1,
+      "name" : "Институт математики и информационных технологий"
+    }
+  },
+  "semesters" : [ {
+    "id" : 1,
+    "number" : 1,
+    "certification_form" : "Зачет",
+    "hours" : 72,
+    "exam_hours" : 0,
+    "contact_hours" : 36,
+    "lectures" : 35,
+    "lab_work" : null,
+    "practical_work" : null,
+    "seminar" : null,
+    "tactical_work" : null,
+    "military_work" : null,
+    "methodical_work" : null,
+    "conference" : null,
+    "audience" : null,
+    "consultation" : null,
+    "ko" : null,
+    "ind_work" : null,
+    "control" : null,
+    "credits" : 2,
+    "exam_credits" : 0
+  } ],
+  "has_coursework" : true
+}

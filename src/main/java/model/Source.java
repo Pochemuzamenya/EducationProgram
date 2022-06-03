@@ -10,18 +10,14 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString
-@Table(name = "results")
-public class Result {
+@Table(name = "sources")
+public class Source {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column
-    private String knowledges;
-    @Column
-    private String skills;
-    @Column
-    private String masterings;
+    private String description;
 
-    public Result() {
+    public Source() {
     }
 }

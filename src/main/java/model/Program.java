@@ -1,6 +1,6 @@
 package model;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.vladmihalcea.hibernate.type.array.IntArrayType;
 import com.vladmihalcea.hibernate.type.array.StringArrayType;
 import lombok.Getter;
@@ -39,29 +39,20 @@ public class Program {
     @Column
     private String status;
     @ManyToOne
-    private LearningProfile learning_profile;
-    //@OneToOne
-    //private Specialty specialty;
-    @Column
-    private Integer year;
-    @Column
-    private String degree;
+    private LessonPlan lesson_plan;
     @ManyToOne
     private Chair chair;
-    @OneToOne
-    private Version version;
-    @Column(name = "index")
-    private String subject_index;
-    @Type(type = "int-array")
-    @Column(columnDefinition = "integer[]")
-    private Integer[] semesters;
-    @Column
-    private String study_form;
+    /*@OneToOne
+    private Version version;*/
+    private String index;
     @Column
     private String purpose;
-    @Type(type = "string-array")
-    @Column
-    private String[] tasks;
+    @OneToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @JoinTable(name = "programs_tasks",
+            joinColumns = {@JoinColumn(name = "program_id")},
+            inverseJoinColumns = {@JoinColumn(name = "task_id")})
+    private List<Task> tasks;
     @ManyToMany
     @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(name = "subjects_before",
@@ -74,12 +65,12 @@ public class Program {
             joinColumns = {@JoinColumn(name = "program_id")},
             inverseJoinColumns = {@JoinColumn(name = "subject_id")})
     private List<Subject> subjects_after;
-    @ManyToMany
+    /*@ManyToMany
     @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(name = "programs_competences",
             joinColumns = {@JoinColumn(name = "program_id")},
             inverseJoinColumns = {@JoinColumn(name = "competence_id")})
-    private List<Competence> competences;
+    private List<Competence> competences;*/
     @Column
     private Integer hours;
     @Column
@@ -90,45 +81,102 @@ public class Program {
     private String certification_form;
     @Column
     private Integer exam_credits;
-    @Type(type = "string-array")
     @Column
-    private String[] certification_forms;
-    @ManyToMany
+    private Integer contact_hours;
+    @Column
+    private Integer lectures;
+    @Column
+    private Integer lab_work;
+    @Column
+    private Integer practical_work;
+    @Column
+    private Integer seminar;
+    @Column
+    private Integer tactical_work;
+    @Column
+    private Integer military_work;
+    @Column
+    private Integer methodical_work;
+    @Column
+    private Integer conference;
+    @Column
+    private Integer audience;
+    @Column
+    private Integer consultation;
+    @Column
+    private Integer ko;
+    @Column
+    private Integer ind_work;
+    @Column
+    private Integer control;
+    /*@ManyToMany
     @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(name = "programs_subsections",
             joinColumns = {@JoinColumn(name = "program_id")},
             inverseJoinColumns = {@JoinColumn(name = "subsection_id")})
-    private List<Subsection> subsections;
-
+    private List<Subsection> subsections;*/
+    @OneToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @JoinTable(name = "programs_semesters",
+            joinColumns = {@JoinColumn(name = "program_id")},
+            inverseJoinColumns = {@JoinColumn(name = "semester_id")})
+    private List<Semester> semesters;
     @Column
     private String guidance;
     @Column
     private Boolean has_coursework;
+    @OneToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @JoinTable(name = "programs_courseworks",
+            joinColumns = {@JoinColumn(name = "program_id")},
+            inverseJoinColumns = {@JoinColumn(name = "coursework_id")})
+    private List<Coursework> courseworks;
+    @OneToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @JoinTable(name = "programs_books",
+            joinColumns = {@JoinColumn(name = "program_id")},
+            inverseJoinColumns = {@JoinColumn(name = "source_id")})
+    private List<Source> books;
+    @OneToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @JoinTable(name = "programs_add_books",
+            joinColumns = {@JoinColumn(name = "program_id")},
+            inverseJoinColumns = {@JoinColumn(name = "source_id")})
+    private List<Source> addBooks;
+    @OneToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @JoinTable(name = "programs_periodicals",
+            joinColumns = {@JoinColumn(name = "program_id")},
+            inverseJoinColumns = {@JoinColumn(name = "source_id")})
+    private List<Source> periodicals;
+    @OneToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @JoinTable(name = "programs_databases",
+            joinColumns = {@JoinColumn(name = "program_id")},
+            inverseJoinColumns = {@JoinColumn(name = "source_id")})
+    private List<Source> databases;
+    @OneToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @JoinTable(name = "programs_meth_works",
+            joinColumns = {@JoinColumn(name = "program_id")},
+            inverseJoinColumns = {@JoinColumn(name = "source_id")})
+    private List<Source> methWorks;
     @Column
-    private String coursework_theme;
-    @Type(type = "string-array")
+    private String lab_equipment;
+    @ManyToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @JoinTable(name = "programs_equipment",
+            joinColumns = {@JoinColumn(name = "program_id")},
+            inverseJoinColumns = {@JoinColumn(name = "equipment_id")})
+    private List<Equipment> equipment;
+    @ManyToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @JoinTable(name = "programs_software",
+            joinColumns = {@JoinColumn(name = "program_id")},
+            inverseJoinColumns = {@JoinColumn(name = "software_id")})
+    private List<Software> software;
     @Column
-    private String[] bibliography;
-    @Type(type = "string-array")
-    @Column
-    private String[] periodicals;
-    @Type(type = "string-array")
-    @Column
-    private String[] teaching_materials;
-    @Type(type = "string-array")
-    @Column
-    private String[] databases;
-    @Type(type = "string-array")
-    @Column
-    private String[] lab_equipment;
-    @Type(type = "string-array")
-    @Column
-    private String[] software;
-    @Type(type = "string-array")
-    @Column
-    private String[] technical_means;
-    @Column
-    private String educational_technologies;
+    private String educational_tech;
     @ManyToMany
     @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(name = "programs_lesson_forms",
@@ -147,70 +195,27 @@ public class Program {
             joinColumns = {@JoinColumn(name = "program_id")},
             inverseJoinColumns = {@JoinColumn(name = "teacher_id")})
     private List<Teacher> teachers;
-    @ManyToOne
-    private Teacher chair_head;
-
+    @Column
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
+    private Timestamp creation_date;
+    @Column
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
+    private Timestamp last_edit;
     public Program() {
     }
 
-    public Program(Program p) {
-        this.subject = p.subject;
-        this.status = p.status;
-        this.learning_profile = p.learning_profile;
-        this.year = p.year;
-        this.degree = p.degree;
-        this.chair = p.chair;
-        this.subject_index = p.subject_index;
-        this.semesters = p.semesters;
-        this.study_form = p.study_form;
-        this.purpose = p.purpose;
-        this.tasks = p.tasks;
-        this.subjects_before = p.subjects_before;
-        this.subjects_after = p.subjects_after;
-        this.competences = p.competences;
-        this.hours = p.hours;
-        this.exam_hours = p.exam_hours;
-        this.credits = p.credits;
-        this.certification_form = p.certification_form;
-        this.exam_credits = p.exam_credits;
-        this.certification_forms = p.certification_forms;
-        this.subsections = p.subsections;
-        //this.indWorks = p.indWorks;
-        //this.seminars = p.seminars;
-        //this.issues = p.issues;
-        this.guidance = p.guidance;
-        this.coursework_theme = p.coursework_theme;
-        this.bibliography = p.bibliography;
-        this.periodicals = p.periodicals;
-        this.teaching_materials = p.teaching_materials;
-        this.databases = p.databases;
-        this.lab_equipment = p.lab_equipment;
-        this.software = p.software;
-        this.technical_means = p.technical_means;
-        this.lessonForms = p.lessonForms;
-        this.teachers = p.teachers;
-        this.chair_head = p.chair_head;
-    }
 
     public void copyParameters(Program p) {
         if (p.subject != null)
             this.subject = p.subject;
         if (p.status != null)
             this.status = p.status;
-        if (p.learning_profile != null)
-            this.learning_profile = p.learning_profile;
-        if (p.year != null)
-            this.year = p.year;
-        if (p.degree != null)
-            this.degree = p.degree;
+        if (p.lesson_plan != null)
+            this.lesson_plan = p.lesson_plan;
         if (p.chair != null)
             this.chair = p.chair;
-        if (p.subject_index != null)
-            this.subject_index = p.subject_index;
-        if (p.semesters != null)
-            this.semesters = p.semesters;
-        if (p.study_form != null)
-            this.study_form = p.study_form;
+        if (p.index != null)
+            this.index = p.index;
         if (p.purpose != null)
             this.purpose = p.purpose;
         if (p.tasks != null)
@@ -219,8 +224,6 @@ public class Program {
             this.subjects_before = p.subjects_before;
         if (p.subjects_after != null)
             this.subjects_after = p.subjects_after;
-        if (p.competences != null)
-            this.competences = p.competences;
         if (p.hours != null)
             this.hours = p.hours;
         if (p.exam_hours != null)
@@ -229,57 +232,74 @@ public class Program {
             this.credits = p.credits;
         if (p.certification_form != null)
             this.certification_form = p.certification_form;
+        if (p.contact_hours != null)
+            this.contact_hours = p.contact_hours;
+        if (p.lectures != null)
+            this.lectures = p.lectures;
+        if (p.lab_work != null)
+            this.lab_work = p.lab_work;
+        if (p.practical_work != null)
+            this.practical_work = p.practical_work;
+        if (p.seminar != null)
+            this.seminar = p.seminar;
+        if (p.tactical_work != null)
+            this.tactical_work = p.tactical_work;
+        if (p.military_work != null)
+            this.military_work = p.military_work;
+        if (p.methodical_work != null)
+            this.methodical_work = p.methodical_work;
+        if (p.conference != null)
+            this.conference = p.conference;
+        if (p.audience != null)
+            this.audience = p.audience;
+        if (p.consultation != null)
+            this.consultation = p.consultation;
+        if (p.ko != null)
+            this.ko = p.ko;
+        if (p.ind_work != null)
+            this.ind_work = p.ind_work;
+        if (p.control != null)
+            this.control = p.control;
         if (p.exam_credits != null)
             this.exam_credits = p.exam_credits;
-        if (p.certification_forms != null)
-            this.certification_forms = p.certification_forms;
-        if (p.subsections != null)
-            this.subsections = p.subsections;
-        /*
-        if (p.indWorks != null)
-            this.indWorks = p.indWorks;
-        if (p.seminars != null)
-            this.seminars = p.seminars;
-        if (p.issues != null)
-            this.issues = p.issues;
-         */
+        if (p.semesters != null)
+            this.semesters = p.semesters;
         if (p.guidance != null)
             this.guidance = p.guidance;
-        if (p.coursework_theme != null)
-            this.coursework_theme = p.coursework_theme;
-        if (p.bibliography != null)
-            this.bibliography = p.bibliography;
+        if (p.has_coursework != null)
+            this.has_coursework = p.has_coursework;
+        if (p.courseworks != null)
+            this.courseworks = p.courseworks;
+        if (p.books != null)
+            this.books = p.books;
+        if (p.addBooks != null)
+            this.addBooks = p.addBooks;
         if (p.periodicals != null)
             this.periodicals = p.periodicals;
-        if (p.teaching_materials != null)
-            this.teaching_materials = p.teaching_materials;
+        if (p.methWorks != null)
+            this.methWorks = p.methWorks;
         if (p.databases != null)
             this.databases = p.databases;
         if (p.lab_equipment != null)
             this.lab_equipment = p.lab_equipment;
+        if (p.equipment != null)
+            this.equipment = p.equipment;
         if (p.software != null)
             this.software = p.software;
-        if (p.technical_means != null)
-            this.technical_means = p.technical_means;
+        if (p.educational_tech != null)
+            this.educational_tech = p.educational_tech;
         if (p.lessonForms != null)
             this.lessonForms = p.lessonForms;
         if (p.teachers != null)
             this.teachers = p.teachers;
-        if (p.chair_head != null)
-            this.chair_head = p.chair_head;
-        this.version.setLast_edit(new Timestamp(System.currentTimeMillis()));
-        /*
-        this.subject = old.subject;
-        this.status = old.status;
-        this.learning_profile = old.learning_profile;
-        //this.specialty = old.specialty;
-        this.year = old.year;
-        this.degree = old.degree;
-        this.chair = old.chair;
-        this.version.setLast_edit(new Timestamp(System.currentTimeMillis()));
-        this.subject_index = old.subject_index;
-        this.semestrs = old.semestrs;
-         */
+        if (p.entrance_certification!=null)
+            this.entrance_certification = p.entrance_certification;
+        if (p.current_certification != null)
+            this.current_certification = p.current_certification;
+        if (p.mid_certification != null)
+            this.mid_certification = p.mid_certification;
+        //this.version.setLast_edit(new Timestamp(System.currentTimeMillis()));
+        this.setLast_edit(new Timestamp(System.currentTimeMillis()));
     }
 
 
@@ -291,23 +311,6 @@ public class Program {
         return set;
     }
 
-    @Override
-    public String toString() {
-        return "Program{" +
-                "id=" + id +
-                ", subject=" + subject +
-                ", status='" + status + '\'' +
-                ", learning_profile=" + learning_profile +
-                //", specialty=" + specialty +
-                ", year=" + year +
-                ", degree='" + degree + '\'' +
-                ", chair=" + chair +
-                ", version=" + version +
-                ", subject_index='" + subject_index + '\'' +
-                ", semestrs=" + Arrays.toString(semesters) +
-                ", study_form='" + study_form + '\'' +
-                '}';
-    }
 
 /*
 @JsonValue

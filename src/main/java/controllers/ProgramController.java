@@ -24,8 +24,6 @@ public class ProgramController {
     @Autowired
     SubjectService subjectService;
     @Autowired
-    VersionService versionService;
-    @Autowired
     DegreeService degreeService;
     @Autowired
     StudyFormService studyFormService;
@@ -71,14 +69,14 @@ public class ProgramController {
     @PostMapping(produces = "application/json", consumes = "application/json")
     public Program create(@RequestBody Program program){
         System.out.println(program);
-        Version version = new Version();
-        version.setCreation_date(new Timestamp(System.currentTimeMillis()));
-        version.setLast_edit(new Timestamp(System.currentTimeMillis()));
-        versionService.save(version);
-        program.setVersion(version);
+        program.setCreation_date(new Timestamp(System.currentTimeMillis()));
+        program.setLast_edit(program.getCreation_date());
+        //versionService.save(version);
+        //program.setVersion(version);
         programService.save(program);
         return program;
     }
+
     @PutMapping(value = "/{id}",produces = "application/json", consumes = "application/json")
     public Program update(@PathVariable("id") int id, @RequestBody Program program){
         Program programToUpdate = programService.findById(id);
@@ -92,7 +90,7 @@ public class ProgramController {
         programToUpdate.getVersion.setLast_edit(new Timestamp(System.currentTimeMillis()));
         */
         programToUpdate.copyParameters(program);
-        versionService.save(programToUpdate.getVersion());
+        //versionService.save(programToUpdate.getVersion());
         programService.save(programToUpdate);
         //return null;
         return programToUpdate;

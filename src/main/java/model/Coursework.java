@@ -10,22 +10,14 @@ import javax.persistence.*;
 @Setter
 @ToString
 @Entity
-@Table(name = "indicators")
-public class Indicator {
+@Table(name = "courseworks")
+public class Coursework {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column
-    private String code;
-    @Column
-    private String description;
-    @Column
-    private String know;
-    @Column
-    private String can;
-    @Column
-    private String own;
+    private String theme;
 
-    public Indicator() {
+    public Coursework() {
     }
 }
