@@ -14,7 +14,7 @@ import java.util.Set;
 @Setter
 @ToString
 @Table(name = "seminars")
-public class Seminar {
+public class Seminar implements Cloneable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
