@@ -1,6 +1,7 @@
 package model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vladmihalcea.hibernate.type.array.IntArrayType;
 import com.vladmihalcea.hibernate.type.array.StringArrayType;
 import lombok.Getter;
@@ -29,7 +30,7 @@ import java.util.*;
                 typeClass = StringArrayType.class
         )
 })
-public class Program {
+public class Program implements Cloneable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -39,6 +40,9 @@ public class Program {
     @Column
     private String status;
     @ManyToOne
+    @JoinTable(name = "lesson_plans_programs",
+            joinColumns = {@JoinColumn(name = "program_id")},
+            inverseJoinColumns = {@JoinColumn(name = "lesson_plan_id")})
     private LessonPlan lesson_plan;
     @ManyToOne
     private Chair chair;
@@ -65,56 +69,12 @@ public class Program {
             joinColumns = {@JoinColumn(name = "program_id")},
             inverseJoinColumns = {@JoinColumn(name = "subject_id")})
     private List<Subject> subjects_after;
-    /*@ManyToMany
+    @OneToMany
     @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(name = "programs_competences",
             joinColumns = {@JoinColumn(name = "program_id")},
             inverseJoinColumns = {@JoinColumn(name = "competence_id")})
-    private List<Competence> competences;*/
-    @Column
-    private Integer hours;
-    @Column
-    private Integer exam_hours;
-    @Column
-    private Integer credits;
-    @Column
-    private String certification_form;
-    @Column
-    private Integer exam_credits;
-    @Column
-    private Integer contact_hours;
-    @Column
-    private Integer lectures;
-    @Column
-    private Integer lab_work;
-    @Column
-    private Integer practical_work;
-    @Column
-    private Integer seminar;
-    @Column
-    private Integer tactical_work;
-    @Column
-    private Integer military_work;
-    @Column
-    private Integer methodical_work;
-    @Column
-    private Integer conference;
-    @Column
-    private Integer audience;
-    @Column
-    private Integer consultation;
-    @Column
-    private Integer ko;
-    @Column
-    private Integer ind_work;
-    @Column
-    private Integer control;
-    /*@ManyToMany
-    @LazyCollection(LazyCollectionOption.FALSE)
-    @JoinTable(name = "programs_subsections",
-            joinColumns = {@JoinColumn(name = "program_id")},
-            inverseJoinColumns = {@JoinColumn(name = "subsection_id")})
-    private List<Subsection> subsections;*/
+    private List<Competence> competences;
     @OneToMany
     @LazyCollection(LazyCollectionOption.FALSE)
     @JoinTable(name = "programs_semesters",
@@ -204,103 +164,11 @@ public class Program {
     public Program() {
     }
 
-
-    public void copyParameters(Program p) {
-        if (p.subject != null)
-            this.subject = p.subject;
-        if (p.status != null)
-            this.status = p.status;
-        if (p.lesson_plan != null)
-            this.lesson_plan = p.lesson_plan;
-        if (p.chair != null)
-            this.chair = p.chair;
-        if (p.index != null)
-            this.index = p.index;
-        if (p.purpose != null)
-            this.purpose = p.purpose;
-        if (p.tasks != null)
-            this.tasks = p.tasks;
-        if (p.subjects_before != null)
-            this.subjects_before = p.subjects_before;
-        if (p.subjects_after != null)
-            this.subjects_after = p.subjects_after;
-        if (p.hours != null)
-            this.hours = p.hours;
-        if (p.exam_hours != null)
-            this.exam_hours = p.exam_hours;
-        if (p.credits != null)
-            this.credits = p.credits;
-        if (p.certification_form != null)
-            this.certification_form = p.certification_form;
-        if (p.contact_hours != null)
-            this.contact_hours = p.contact_hours;
-        if (p.lectures != null)
-            this.lectures = p.lectures;
-        if (p.lab_work != null)
-            this.lab_work = p.lab_work;
-        if (p.practical_work != null)
-            this.practical_work = p.practical_work;
-        if (p.seminar != null)
-            this.seminar = p.seminar;
-        if (p.tactical_work != null)
-            this.tactical_work = p.tactical_work;
-        if (p.military_work != null)
-            this.military_work = p.military_work;
-        if (p.methodical_work != null)
-            this.methodical_work = p.methodical_work;
-        if (p.conference != null)
-            this.conference = p.conference;
-        if (p.audience != null)
-            this.audience = p.audience;
-        if (p.consultation != null)
-            this.consultation = p.consultation;
-        if (p.ko != null)
-            this.ko = p.ko;
-        if (p.ind_work != null)
-            this.ind_work = p.ind_work;
-        if (p.control != null)
-            this.control = p.control;
-        if (p.exam_credits != null)
-            this.exam_credits = p.exam_credits;
-        if (p.semesters != null)
-            this.semesters = p.semesters;
-        if (p.guidance != null)
-            this.guidance = p.guidance;
-        if (p.has_coursework != null)
-            this.has_coursework = p.has_coursework;
-        if (p.courseworks != null)
-            this.courseworks = p.courseworks;
-        if (p.books != null)
-            this.books = p.books;
-        if (p.addBooks != null)
-            this.addBooks = p.addBooks;
-        if (p.periodicals != null)
-            this.periodicals = p.periodicals;
-        if (p.methWorks != null)
-            this.methWorks = p.methWorks;
-        if (p.databases != null)
-            this.databases = p.databases;
-        if (p.lab_equipment != null)
-            this.lab_equipment = p.lab_equipment;
-        if (p.equipment != null)
-            this.equipment = p.equipment;
-        if (p.software != null)
-            this.software = p.software;
-        if (p.educational_tech != null)
-            this.educational_tech = p.educational_tech;
-        if (p.lessonForms != null)
-            this.lessonForms = p.lessonForms;
-        if (p.teachers != null)
-            this.teachers = p.teachers;
-        if (p.entrance_certification!=null)
-            this.entrance_certification = p.entrance_certification;
-        if (p.current_certification != null)
-            this.current_certification = p.current_certification;
-        if (p.mid_certification != null)
-            this.mid_certification = p.mid_certification;
-        //this.version.setLast_edit(new Timestamp(System.currentTimeMillis()));
-        this.setLast_edit(new Timestamp(System.currentTimeMillis()));
+    @Override
+    public Program clone() throws CloneNotSupportedException {
+        return (Program) super.clone();
     }
+
 
 
     private java.util.Set<Integer> getCourses(Integer[] semestrs) {

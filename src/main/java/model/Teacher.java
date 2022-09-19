@@ -3,15 +3,18 @@ package model;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @ToString
 @Table(name = "teachers")
-public class Teacher {
+public class Teacher implements Cloneable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -25,7 +28,12 @@ public class Teacher {
     private String rank;
     @Column
     private String degree;
-
+    @ManyToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @JoinTable(name = "teachers_chairs",
+            joinColumns = {@JoinColumn(name = "teacher_id")},
+            inverseJoinColumns = {@JoinColumn(name = "chair_id")})
+    private List<Chair> chairs;
     public Teacher() {
     }
 }

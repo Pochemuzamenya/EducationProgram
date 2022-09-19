@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Setter
 @ToString
 @Table(name = "tasks")
-public class Task {
+public class Task implements Cloneable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

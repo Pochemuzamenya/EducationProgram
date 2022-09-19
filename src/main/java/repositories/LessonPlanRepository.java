@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface LessonPlanRepository extends JpaRepository<LessonPlan, Integer> {
-
+public LessonPlan findById(int id);
 }

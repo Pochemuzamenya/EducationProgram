@@ -1,6 +1,7 @@
 package model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonRawValue;
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,10 +11,9 @@ import javax.persistence.*;
 import java.util.List;
 @Getter
 @Setter
-@ToString
 @Entity
 @Table(name = "learning_profiles")
-public class LearningProfile {
+public class LearningProfile implements Cloneable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -23,5 +23,14 @@ public class LearningProfile {
     private Specialty specialty;
     public LearningProfile() {
     }
-
+/*
+    @JsonValue
+    @JsonRawValue
+    public String toJson() {
+        return "LearningProfile{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", specialty=" + specialty +
+                '}';
+    }*/
 }

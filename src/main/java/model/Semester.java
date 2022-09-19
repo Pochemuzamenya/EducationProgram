@@ -14,7 +14,7 @@ import java.util.List;
 @Setter
 @ToString
 @Table(name = "semesters")
-public class Semester {
+public class Semester implements Cloneable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

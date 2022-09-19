@@ -10,13 +10,18 @@ import javax.persistence.*;
 @ToString
 @Entity
 @Table(name = "subjects")
-public class Subject {
+public class Subject implements Cloneable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column
     private String name;
     public Subject() {
+    }
+
+    @Override
+    protected Subject clone() throws CloneNotSupportedException {
+        return (Subject) super.clone();
     }
 }
 

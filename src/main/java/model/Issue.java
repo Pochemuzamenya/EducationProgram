@@ -1,12 +1,10 @@
 package model;
 
-import com.fasterxml.jackson.annotation.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
-
 import javax.persistence.*;
 import java.util.Set;
 
@@ -29,8 +27,7 @@ public class Issue {
             joinColumns = {@JoinColumn(name = "issue_id")},
             inverseJoinColumns = {@JoinColumn(name = "competence_id")})
     private Set<Competence> competences;
-
+    
     public Issue() {
     }
-
 }

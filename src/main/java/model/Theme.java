@@ -26,15 +26,35 @@ public class Theme {
     @Column
     private Integer lectures;
     @Column
-    private Integer seminars;
+    private Integer seminar;
     @Column
-    private Integer consultations;
+    private Integer consultation;
     @Column
     private Integer ind_work;
     @Column
     private String monitoring;
     @Column
     private String description;
+    @Column
+    private Integer contact_hours;
+    @Column
+    private Integer lab_work;
+    @Column
+    private Integer practical_work;
+    @Column
+    private Integer tactical_work;
+    @Column
+    private Integer military_work;
+    @Column
+    private Integer methodical_work;
+    @Column
+    private Integer conference;
+    @Column
+    private Integer audience;
+    @Column
+    private Integer ko;
+    @Column
+    private Integer control;
     public Theme() {
     }
 }

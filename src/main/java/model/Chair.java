@@ -11,7 +11,7 @@ import javax.persistence.*;
 @ToString
 @Entity
 @Table(name = "chairs")
-public class Chair {
+public class Chair implements Cloneable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -21,6 +21,9 @@ public class Chair {
     private Integer number;
     @OneToOne
     private Faculty faculty;
+    @ManyToOne
+    @JoinColumn(name = "chair_head")
+    private Teacher chair_head;
 
     public Chair() {
     }
