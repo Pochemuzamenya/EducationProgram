@@ -1,4 +1,4 @@
-package controllers;
+package org.isu.rpd.controllers;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.annotation.DateTimeFormat;

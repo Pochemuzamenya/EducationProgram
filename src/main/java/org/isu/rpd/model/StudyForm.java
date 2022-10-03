@@ -1,4 +1,4 @@
-package model;
+package org.isu.rpd.model;
 
 import lombok.Getter;
 import lombok.Setter;
