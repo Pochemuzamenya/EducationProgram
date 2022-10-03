@@ -15,13 +15,16 @@ import java.util.List;
 public class LessonPlanController {
 
     @Autowired
-    LessonPlanService lessonPlanService;
+    private LessonPlanService lessonPlanService;
+
     @Autowired
-    CompetenceService competenceService;
+    private CompetenceService competenceService;
+
     @Autowired
-    IndicatorService indicatorService;
+    private IndicatorService indicatorService;
+
     @Autowired
-    ProgramService programService;
+    private ProgramService programService;
 
     @GetMapping(produces = "application/json")
     public List<LessonPlan> findAll(){
